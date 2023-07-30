@@ -1,0 +1,11 @@
+1) select CustomerId , FirstName , LastName, City from customers where FirstName like 'N%' or City ='London';
+2) select TrackId, Name, Composer, UnitPrice from tracks where UnitPrice BETWEEN 0 and 1 and Composer not like '%T%';
+
+3) select strftime('%Y-%m-%d',InvoiceDate) as date, sum(Total) as Total_bill, avg(Total) as Average_bill from invoices where strftime('%m',InvoiceDate)='06' group by strftime('%d',InvoiceDate);
+4) select TrackId,count(TrackId) as Total from invoice_items group by TrackId order by count(TrackId) DESC;
+
+5) select DISTINCT a.ArtistID, a.Name AS ArtistName from Artists a LEFT JOIN Albums al ON a.ArtistID = al.ArtistID
+   LEFT JOIN Tracks t ON al.AlbumID = t.AlbumID WHERE t.TrackID NOT IN (select pt.TrackID from Playlist_Track pt);
+
+6) select al.AlbumID, al.Title, COUNT(pt.PlaylistID) AS PlaylistCount from Albums al JOIN Tracks t ON al.AlbumID = t.AlbumID
+   JOIN Playlist_Track pt ON t.TrackID = pt.TrackID group by al.AlbumID, al.Title having count(pt.PlaylistID) > 10;
